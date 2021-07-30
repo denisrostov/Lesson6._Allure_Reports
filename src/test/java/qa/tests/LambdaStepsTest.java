@@ -11,19 +11,25 @@ import static org.openqa.selenium.By.linkText;
 import static org.openqa.selenium.By.partialLinkText;
 
 public class LambdaStepsTest {
+
+    String number = "68";
+    String repository = "eroshenkoam/allure-example";
+
     @Test
     public void testRepositoryIssueSteps() {
 
         step("Открываем станицу Github", () ->
                 open("https://github.com"));
-        step("Ищем  репозиторий", () ->
-                $(".header-search-input").setValue("eroshenkoam/allure-example").submit());
-        step("Переходим в репозиторий", () ->
-            $(linkText("eroshenkoam/allure-example")).click());
+        step("Ищем  репозиторий", (s) -> {
+            s.parameter("repository", repository);
+            $(".header-search-input").setValue(repository).submit();
+        });
+        step("Переходим в репозиторий " + repository, () ->
+                $(linkText(repository)).click());
         step("Открываем список Issues", () ->
-            $(partialLinkText("Issues")).click());
-        step("Проверяем наличие Issues с номером 68", () -> {
-            $(withText("#68")).should(visible);
+                $(partialLinkText("Issues")).click());
+        step("Проверяем наличие Issues с номером " + number, () -> {
+            $(withText("#" + number)).should(visible);
         });
 
     }

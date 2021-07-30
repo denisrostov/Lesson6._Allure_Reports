@@ -1,5 +1,6 @@
 package qa.tests;
 
+import helpers.Attach;
 import org.junit.jupiter.api.Test;
 
 public class AnotatedTest {
@@ -12,6 +13,8 @@ public class AnotatedTest {
         steps.searchRepository(repository);
         steps.goToRepository(repository);
         steps.openTabIssues();
+        Attach.screenshotAs("Issues");
         steps.shouldbeVisibleIssueWithNumber(number);
+        Attach.addVideo();
     }
 }
