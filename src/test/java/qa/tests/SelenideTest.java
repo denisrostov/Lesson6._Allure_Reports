@@ -17,8 +17,7 @@ String number = "68";
     public void testRepositoryIssueSelenide() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         open("https://github.com");
-        $(".header-search-input").sendKeys("eroshenkoam/allure-example");
-        $(".header-search-input").submit();
+        $(".header-search-input").setValue("eroshenkoam/allure-example").submit();
         $(linkText("eroshenkoam/allure-example")).click();
         $(partialLinkText("Issues")).click();
         $(withText(String.format("#%s",number))).should(visible);
